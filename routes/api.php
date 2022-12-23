@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AutentifikacijaKontroler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaketKontroler;
@@ -16,12 +17,22 @@ use App\Http\Controllers\KorisnikKontroler;
 |
 */
 
+Route::post('register', [AutentifikacijaKontroler::class, 'register']);
+Route::post('login', [AutentifikacijaKontroler::class, 'login']);
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::delete('paketi/{paket}', [PaketKontroler::class, 'destroy']);
+    Route::put('paketi/{paket}', [PaketKontroler::class, 'update']);
+    Route::delete('korisnik/{korisnik}', [KorisnikKontroler::class, 'destroy']);
+    Route::post('logout', [AutentifikacijaKontroler::class, 'logout']);
+});
+
+
+
 Route::get('paketi', [PaketKontroler::class, 'index']);
 Route::get('paketi/{paket}', [PaketKontroler::class, 'show']);
-Route::delete('paketi/{paket}', [PaketKontroler::class, 'destroy']);
-Route::put('paketi/{paket}', [PaketKontroler::class, 'update']);
 Route::get('korisnik', [KorisnikKontroler::class, 'index']);
-Route::delete('korisnik/{korisnik}', [KorisnikKontroler::class, 'destroy']);
 
 
 
