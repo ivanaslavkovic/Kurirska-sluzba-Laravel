@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaketKontroler;
+use App\Http\Controllers\KorisnikKontroler;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,9 @@ Route::get('paketi', [PaketKontroler::class, 'index']);
 Route::get('paketi/{paket}', [PaketKontroler::class, 'show']);
 Route::delete('paketi/{paket}', [PaketKontroler::class, 'destroy']);
 Route::put('paketi/{paket}', [PaketKontroler::class, 'update']);
+Route::get('korisnik', [KorisnikKontroler::class, 'index']);
+Route::delete('korisnik/{korisnik}', [KorisnikKontroler::class, 'destroy']);
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
